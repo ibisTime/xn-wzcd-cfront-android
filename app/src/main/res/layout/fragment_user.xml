@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/title_top_style"
+            android:text="我的" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/bg_gray">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/lin_user_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_bg"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="0dp">
+
+                        <ImageView
+                            android:id="@+id/img_user_logo"
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/photo_default" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_user_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="士大夫"
+                                android:textColor="@color/white"
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:id="@+id/tv_user_phone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="323263232"
+                                android:textColor="@color/white"
+                                android:textSize="12sp" />
+
+
+                        </LinearLayout>
+
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="15dp"
+                            android:src="@drawable/more_right_white" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <LinearLayout
+                            android:id="@+id/ll_coin"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="账户余额:"
+                                android:textColor="@color/white"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/tv_amount"
+                                android:layout_marginLeft="3dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0.00"
+                                android:textColor="@color/white"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:background="@color/line_gray_cd"
+                            android:layout_width="1px"
+                            android:layout_height="24dp"/>
+
+                        <LinearLayout
+                            android:id="@+id/ll_ticket"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+
+
+                            <TextView
+                                android:text="账户积分:"
+                                android:textSize="13sp"
+                                android:textColor="@color/white"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:id="@+id/tv_ticket"
+                                android:text="0.00"
+                                android:textSize="13sp"
+                                android:textColor="@color/white"
+                                android:layout_marginLeft="3dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <com.cdkj.baselibrary.views.RowInfoLayout
+                    android:visibility="gone"
+                    android:id="@+id/row_collection"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:img_left="@drawable/account"
+                    app:img_right="@drawable/more_right"
+                    app:txt_left="积分账户" />
+
+                <com.cdkj.baselibrary.views.RowInfoLayout
+                    android:id="@+id/ril_credit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/line_height"
+                    app:img_left="@drawable/credit_report"
+                    app:img_right="@drawable/more_right"
+                    app:txt_left="信用报告" />
+
+                <com.cdkj.baselibrary.views.RowInfoLayout
+                    android:id="@+id/ril_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:img_left="@drawable/message"
+                    app:img_right="@drawable/more_right"
+                    app:txt_left="我的消息" />
+
+                <com.cdkj.baselibrary.views.RowInfoLayout
+                    android:id="@+id/rfl_my_car_loan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/line_height"
+                    app:img_left="@drawable/note"
+                    app:img_right="@drawable/more_right"
+                    app:txt_left="我的车贷申请" />
+
+
+                <com.cdkj.baselibrary.views.RowInfoLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:img_left="@drawable/question"
+                    app:img_right="@drawable/more_right"
+                    app:txt_left="常见问题" />
+
+                <com.cdkj.baselibrary.views.RowInfoLayout
+                    android:id="@+id/rif_call_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/line_height"
+                    app:img_left="@drawable/customer"
+                    app:img_right="@drawable/more_right"
+                    app:txt_left="联系客服" />
+
+                <com.cdkj.baselibrary.views.RowInfoLayout
+                    android:id="@+id/rif_about_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:img_left="@drawable/about_us"
+                    app:img_right="@drawable/more_right"
+                    app:txt_left="关于我们" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+</layout>

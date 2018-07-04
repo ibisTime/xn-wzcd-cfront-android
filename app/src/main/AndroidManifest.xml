@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cdkj.huatuweitong">
+
+    <application
+        android:name=".BaseApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".WelcomeActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- com.cdkj.baselibrary.activitys.login.LoginActivity -->
+        <activity android:name=".MainActivity">
+
+        </activity>
+        <activity
+            android:name=".module.mfirst_page.CarLoanCalculatorActivity"
+            android:label="@string/title_activity_car_calculator"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".module.user.UserInfoUpdateActivity" />
+        <activity android:name=".module.user.UpDataLoginPSW" />
+        <activity android:name=".module.user.UpDataPhoneActivity" />
+        <activity android:name=".module.user.UserCreditActivity" />
+        <activity android:name=".module.user.AddressManagerActivity" />
+        <activity android:name=".module.reimbursement.CarLoanDetailsActivity" />
+        <activity android:name=".module.mfirst_page.CarDetailsActivity" />
+        <activity android:name=".module.mfirst_page.OrderSubmitActivity" />
+        <activity android:name=".module.mfirst_page.PayActivity" />
+        <activity android:name="com.cdkj.baselibrary.activitys.login.RegisterActivity" />
+        <activity android:name=".module.user.NickNameUpdateActivity" />
+        <activity
+            android:name=".module.mfirst_page.ExhibitionCenterActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".module.user.MyCarLoanActivity" />
+        <activity android:name=".module.reimbursement.RepaymentPlanActivity" />
+        <activity android:name=".module.reimbursement.AdvanceDetailsActivity" />
+        <activity android:name=".module.product.ProductDetailsActivity" />
+        <!-- <activity android:name=".module.order.OrderListActivity" /> -->
+        <activity android:name=".module.order.AllOrderTabActivity" />
+        <activity android:name=".module.order.OrderDetailsActivity" />
+        <activity android:name=".module.user.MyCurrentActivity" />
+        <activity android:name=".module.user.MyMessageActivity" />
+        <activity
+            android:name=".module.user.AboutUsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_about_us"
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".module.mfirst_page.CarBrandActivity" />
+        <activity android:name=".module.mfirst_page.CarModeldActivity" />
+        <activity android:name=".module.user.ConnectionServerActivity" />
+        <activity android:name=".module.mfirst_page.CarSystemActivity" />
+        <activity android:name=".module.user.MyAccountActivity" />
+        <activity android:name=".module.user.AccountDetailsActivity" />
+        <activity android:name=".module.user.AccountIntegralActivity" />
+        <activity android:name=".module.recharge.RechargeActivity" />
+        <activity android:name=".module.user.AccountIntegraActivity" />
+        <activity android:name=".module.recharge.PutForwardActivity"></activity>
+        <activity android:name=".module.user.account.WithdrawActivity" />
+        <activity android:name=".module.mfirst_page.RecommendProductListActivity" />
+
+    </application>
+
+</manifest>
