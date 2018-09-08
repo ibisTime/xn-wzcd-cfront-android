@@ -37,19 +37,16 @@ public class MyCarLoanFragmentAdapter extends BaseQuickAdapter<MyCarLoanFragment
             helper.setText(R.id.tv_type, "未通过");
             helper.setTextColor(R.id.tv_type, Color.rgb(47, 147, 237));
         }
-//        else if (TextUtils.equals("2", item.getStatus())) {
-//            helper.setText(R.id.tv_type, "已作废");
-//            helper.setTextColor(R.id.tv_type, Color.rgb(153, 153, 153));
-//        }
 
-//        MyTextUtils.setStatusType004(helper.getView(R.id.tv_type),item.getStatus());
+        if (item.getCar() != null) {
+            helper.setText(R.id.tv_name, item.getCar().getName() + item.getCar().getSeriesName());
+            helper.setText(R.id.tv_slogan, item.getCar().getSlogan());
+        }
 
-        helper.setText(R.id.tv_name, item.getSeriesName());
-
-        helper.setText(R.id.tv_total_money, "总价: " + MoneyUtils.getShowPriceSign(item.getPrice()));
-        helper.setText(R.id.tv_one_pay, "首付: " + MoneyUtils.getShowPriceSign(item.getSfAmount()));
+        helper.setText(R.id.tv_total_money, "全款" + MoneyUtils.showMoneyFormt(item.getPrice()));
+        helper.setText(R.id.tv_one_pay, "首付" + MoneyUtils.showMoneyFormt(item.getSfAmount()));
         ImageView ivLogo = helper.getView(R.id.iv_logo);
-        ImgUtils.loadQiniuImg(mContext,item.getCar().getPic(),ivLogo);
+        ImgUtils.loadQiniuImg(mContext, item.getCar().getPic(), ivLogo);
 //        iv_logo
     }
 }

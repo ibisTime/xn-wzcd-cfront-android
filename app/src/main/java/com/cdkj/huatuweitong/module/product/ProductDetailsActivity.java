@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,7 +18,6 @@ import com.cdkj.baselibrary.dialog.UITipDialog;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.ImgUtils;
-import com.cdkj.baselibrary.utils.LogUtil;
 import com.cdkj.baselibrary.utils.MoneyUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.huatuweitong.R;
@@ -205,6 +203,7 @@ public class ProductDetailsActivity extends AbsBaseLoadActivity {
      */
     public void setDialogData(RecommendProductBean data) {
         if (data == null) return;
+
 
         ImgUtils.loadQiniuImg(this, StringUtils.getAsPicListIndexOne(data.getAdvPic()), dialogBinding.ivImg);
         dialogBinding.tvName.setText(data.getName());

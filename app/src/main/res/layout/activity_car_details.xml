@@ -30,8 +30,8 @@
                         android:layout_height="match_parent"
                         app:indicator_drawable_selected="@null"
                         app:indicator_drawable_unselected="@null"
-                        app:indicator_height="0dp"
-                        app:indicator_width="0dp"
+                        app:indicator_height="20dp"
+                        app:indicator_width="40dp"
                         app:is_auto_play="false" />
                     <!--设置轮播图的指示点-->
                     <!--app:indicator_drawable_selected="@drawable/banner_select"-->
@@ -41,17 +41,18 @@
                     <!--app:indicator_width="7dp"-->
                     <!--app:delay_time="4000"-->
 
-                    <TextView
-                        android:id="@+id/tv_indicator"
-                        android:layout_width="40dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginRight="20dp"
-                        android:background="#99333333"
-                        android:gravity="center"
-                        tools:text="1/16" />
+                    <!--<TextView-->
+                    <!--android:id="@+id/tv_indicator"-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_marginBottom="20dp"-->
+                    <!--android:layout_marginRight="20dp"-->
+                    <!--android:background="#99333333"-->
+                    <!--android:gravity="center"-->
+                    <!--tools:text="1/16" />-->
                 </RelativeLayout>
 
 
@@ -71,8 +72,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
-                    android:text="¥22.58万"
-                    android:textColor="@color/break_text"
+                    tools:text="¥22.58万"
+                    android:textColor="@color/shell_red"
                     android:textSize="18sp" />
 
                 <LinearLayout
@@ -86,14 +87,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:text="经销商参考价¥23.90万" />
+                        android:text="经销商参考价¥23.90万"
+                        android:textColor="@color/gray_text"
+                        android:textSize="12dp" />
 
                     <TextView
                         android:id="@+id/tv_direction_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:text="经厂商指导价20.89万" />
+                        android:text="经厂商指导价20.89万"
+                        android:textColor="@color/gray_text"
+                        android:textSize="12dp" />
                 </LinearLayout>
 
                 <View
@@ -126,10 +131,10 @@
 
                 <WebView
                     android:id="@+id/web"
-                    android:paddingLeft="@dimen/layout_left_interval"
-                    android:paddingRight="@dimen/layout_right_interval"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/layout_left_interval"
+                    android:paddingRight="@dimen/layout_right_interval">
 
                 </WebView>
 

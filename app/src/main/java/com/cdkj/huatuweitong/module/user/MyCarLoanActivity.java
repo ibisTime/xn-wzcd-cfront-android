@@ -18,8 +18,8 @@ public class MyCarLoanActivity extends AbsBaseLoadActivity {
     ActivityMyCarLoanBinding mBinding;
 
     public static void open(Context context) {
-        if (context!=null) {
-            context.startActivity(new Intent(context,MyCarLoanActivity.class));
+        if (context != null) {
+            context.startActivity(new Intent(context, MyCarLoanActivity.class));
         }
 
     }

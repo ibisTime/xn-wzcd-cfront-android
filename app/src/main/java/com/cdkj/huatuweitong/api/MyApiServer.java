@@ -3,6 +3,7 @@ package com.cdkj.huatuweitong.api;
 import com.cdkj.baselibrary.api.BaseResponseListModel;
 import com.cdkj.baselibrary.api.BaseResponseModel;
 import com.cdkj.baselibrary.api.ResponseInListModel;
+import com.cdkj.baselibrary.model.NodeModel;
 import com.cdkj.huatuweitong.bean.AccountDetailsBean;
 import com.cdkj.huatuweitong.bean.AccountListModel;
 import com.cdkj.huatuweitong.bean.AdvanceDetailsActivityBean;
@@ -30,6 +31,7 @@ import com.cdkj.huatuweitong.bean.RecommendProductBean;
 import com.cdkj.huatuweitong.bean.ReimbursementRepaymentBean;
 import com.cdkj.huatuweitong.bean.ReimbursementRepaymentMonthBean;
 import com.cdkj.huatuweitong.bean.SystemEarlyRepaymentBean;
+import com.cdkj.huatuweitong.bean.SystemParameterBean;
 import com.cdkj.huatuweitong.bean.TextBean;
 import com.cdkj.huatuweitong.bean.UserFragmentBean;
 import com.cdkj.huatuweitong.bean.WithdrawTipModel;
@@ -418,5 +420,25 @@ public interface MyApiServer {
     @FormUrlEncoded
     @POST("api")
     Call<BaseResponseModel<MsgListModel>> getMsgList(@Field("code") String code, @Field("json") String json);
+
+    /**
+     * 获取服务热线
+     *
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<SystemParameterBean>> getTelephone(@Field("code") String code, @Field("json") String json);
+
+    /**
+     * 获取节列表
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseListModel<NodeModel>> getNodeDataList(@Field("code") String code, @Field("json") String json);
 
 }

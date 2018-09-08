@@ -13,11 +13,14 @@ public class MoneyUtils {
 
     /**
      * 将厘变为元 返回String
-     *1000转换率
+     * 1000转换率
+     *
      * @param bigDecimal
      * @return
      */
     public static String BigDecimalToString(BigDecimal bigDecimal) {
+        if (bigDecimal == null)
+            return "0";
 
         BigDecimal divide = bigDecimal.divide(new BigDecimal(1000));
         BigDecimal decimal = divide.setScale(2, BigDecimal.ROUND_DOWN);
@@ -37,10 +40,11 @@ public class MoneyUtils {
 
     /**
      * bigDecimal  做乘法结果保留两位小数返回
+     *
      * @param bigDecimal
      * @return
      */
-    public static BigDecimal bigDecimalRide(BigDecimal bigDecimal,double dou) {
+    public static BigDecimal bigDecimalRide(BigDecimal bigDecimal, double dou) {
         BigDecimal multiply = bigDecimal.multiply(new BigDecimal(dou));
         BigDecimal decimal = multiply.setScale(2, BigDecimal.ROUND_DOWN);
         return decimal;

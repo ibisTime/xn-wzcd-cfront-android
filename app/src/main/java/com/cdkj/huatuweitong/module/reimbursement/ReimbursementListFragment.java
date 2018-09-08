@@ -184,6 +184,7 @@ public class ReimbursementListFragment extends AbsRefreshListFragment {
         map.put("limit", limit + "");
         map.put("start", pageindex + "");
         map.put("userId", SPUtilHelpr.getUserId());
+
         if (isShowDialog) {
             showLoadingDialog();
         }

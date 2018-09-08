@@ -28,18 +28,12 @@ public class ExhibitionCenterAdapter extends BaseQuickAdapter<ExhibitionCenterBe
 
     @Override
     protected void convert(BaseViewHolder helper, ExhibitionCenterBean item) {
-//        helper.setText(R.id.tv_name,)
-//        tv_name
-//                tv_price
-//        tv_month
-//                iv_logo
 
         helper.setText(R.id.tv_name, item.getName());
         helper.setText(R.id.tv_type_name, item.getSeriesName());
-        helper.setText(R.id.tv_price, "总价" + MoneyUtils.showPriceDouble(item.getSalePrice()) + "元");
-
-        helper.setText(R.id.tv_first_pay, "首付: " + MoneyUtils.showPriceDouble(item.getSfAmount())  + "元");
+        helper.setText(R.id.tv_price, "总价" + MoneyUtils.showMoneyFormt(item.getSalePrice() + ""));
+        helper.setText(R.id.tv_first_pay, MoneyUtils.showMoneyFormt(item.getSfAmount() + ""));
         ImageView imgLogo = helper.getView(R.id.iv_logo);
-        ImgUtils.loadQiniuImg(mContext,item.getPic(),imgLogo);
+        ImgUtils.loadQiniuImg(mContext, item.getPic(), imgLogo);
     }
 }

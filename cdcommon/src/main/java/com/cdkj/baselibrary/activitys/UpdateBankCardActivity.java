@@ -178,6 +178,10 @@ public class UpdateBankCardActivity extends AbsBaseLoadActivity {
     private void updateBank() {
         if (mBankModel == null) return;
         Map<String, String> object = new HashMap<>();
+
+        if (mSelectCardId.length() < 15) {
+            object.put("type", "C");
+        }
         object.put("bankCode", mSelectCardId);
         object.put("bankName", mBinding.txtBankName.getText().toString().trim());
         object.put("bankcardNumber", mBinding.edtCardId.getText().toString().trim());
@@ -185,7 +189,7 @@ public class UpdateBankCardActivity extends AbsBaseLoadActivity {
         object.put("code", mBankModel.getCode());
         object.put("subbranch", mBinding.editBankNameChild.getText().toString().trim());
         object.put("token", SPUtilHelpr.getUserToken());
-        object.put("updater",  SPUtilHelpr.getUserId());
+        object.put("updater", SPUtilHelpr.getUserId());
 
 
 //        object.put("realName", mBinding.editName.getText().toString().trim());

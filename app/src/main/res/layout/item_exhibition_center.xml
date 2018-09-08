@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
     android:background="@color/white"
     android:orientation="horizontal"
     android:paddingBottom="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
     android:paddingTop="10dp">
 
     <FrameLayout
@@ -18,17 +19,16 @@
             android:id="@+id/iv_logo"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_alipay" />
+            android:scaleType="fitXY" />
 
         <TextView
             android:layout_width="30dp"
             android:layout_height="16dp"
             android:background="@color/blue"
             android:gravity="center"
-            android:textSize="10sp"
             android:text="热销"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="10sp" />
     </FrameLayout>
 
     <LinearLayout
@@ -53,31 +53,34 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="8dp"
-            android:text="2018最新款的SUV" />
+            android:text="2018最新款的SUV"
+            android:textColor="@color/gray_text"
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
 
-            <TextView
-                android:id="@+id/tv_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="20.39万"
-                android:textColor="@color/shell_red"
-                android:textSize="16sp" />
-
 
             <TextView
                 android:id="@+id/tv_first_pay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/shell_red"
+                android:textSize="16sp"
+                tools:text="首付: 8000元" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
                 android:layout_marginLeft="20dp"
-                android:textSize="14sp"
-                android:text="首付: 8000元"
-                />
+                android:textColor="@color/gray_text"
+                tools:text="总价20.39万"
+                tools:textSize="12sp" />
 
         </LinearLayout>
     </LinearLayout>

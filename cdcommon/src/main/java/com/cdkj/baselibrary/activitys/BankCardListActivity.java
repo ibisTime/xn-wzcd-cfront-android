@@ -49,6 +49,23 @@ public class BankCardListActivity extends AbsRefreshListActivity {
 
 
     @Override
+    public void topTitleViewRightClick() {
+        AddBankCardActivity.open(this);
+    }
+
+    @Override
+    public void afterCreate(Bundle savedInstanceState) {
+        mBaseBinding.titleView.setRightTitle("添加");
+        mBaseBinding.titleView.setMidTitle("我的银行卡");
+        initRefreshHelper(10);
+
+        if (getIntent() != null) {
+            isSelect = getIntent().getBooleanExtra("isSelect", false);
+        }
+    }
+
+
+    @Override
     public RecyclerView.Adapter getListAdapter(List listData) {
         BankCardListAdapter bankCardListAdapter = new BankCardListAdapter(listData);
         bankCardListAdapter.setOnItemClickListener((adapter, view, position) -> {
@@ -73,6 +90,7 @@ public class BankCardListActivity extends AbsRefreshListActivity {
         object.put("userId", SPUtilHelpr.getUserId());
         object.put("start", pageindex + "");
         object.put("limit", limit + "");
+        object.put("type", "C");
 
         Call<BaseResponseModel<MyBankCardListMode>> call = RetrofitUtils.getBaseAPiService().getCardListData("802015", StringUtils.getJsonToString(object));
 
@@ -94,21 +112,6 @@ public class BankCardListActivity extends AbsRefreshListActivity {
 
     }
 
-    @Override
-    public void topTitleViewRightClick() {
-        AddBankCardActivity.open(this);
-    }
-
-    @Override
-    public void afterCreate(Bundle savedInstanceState) {
-        mBaseBinding.titleView.setRightTitle("添加");
-        mBaseBinding.titleView.setMidTitle("我的银行卡");
-        initRefreshHelper(10);
-
-        if (getIntent() != null) {
-            isSelect = getIntent().getBooleanExtra("isSelect", false);
-        }
-    }
 
     @Override
     protected void onResume() {

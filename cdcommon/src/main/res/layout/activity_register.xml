@@ -114,12 +114,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView2"
+
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingLeft="15dp"
-                    android:text="密码"
+                    android:text="昵称"
                     android:textColor="@color/fontColor_gray"
                     android:textSize="15sp" />
 
@@ -130,9 +130,44 @@
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:gravity="center_vertical"
-                    android:hint="请输入密码"
-                    android:inputType="textPassword"
+                    android:hint="请输入昵称"
                     android:maxLength="10"
+                    android:textColor="@color/fontColor_gray"
+                    android:textColorHint="@color/fontColor_hint"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F0F0F0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:text="密码"
+                    android:textColor="@color/fontColor_gray"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/edt_repassword1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="请输入密码"
+                    android:maxLength="10"
+                    android:inputType="textPassword"
                     android:textColor="@color/fontColor_gray"
                     android:textColorHint="@color/fontColor_hint"
                     android:textSize="14sp" />
@@ -178,9 +213,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:id="@+id/tv_check"
@@ -193,8 +228,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:button="@null"
-                android:drawablePadding="5dp"
                 android:drawableLeft="@drawable/ra_terms_check"
+                android:drawablePadding="5dp"
                 android:text="我已阅读并同意"
                 android:textColor="@color/txt_gray" />
 

@@ -1,5 +1,7 @@
 package com.cdkj.baselibrary.utils;
 
+import android.text.TextUtils;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -63,10 +65,10 @@ public class MoneyUtils {
         return 0.00;
     }
 
-    public static String doubleFormatSXF(double d){
+    public static String doubleFormatSXF(double d) {
         DecimalFormat df = new DecimalFormat("#######0.000");
         String showMoney = df.format(d);
-        return showMoney.substring(0,showMoney.length()-1);
+        return showMoney.substring(0, showMoney.length() - 1);
     }
 
     /**
@@ -196,6 +198,7 @@ public class MoneyUtils {
 
     /**
      * 将金额 乘以 1000返回String
+     *
      * @param money
      * @return
      */
@@ -208,6 +211,7 @@ public class MoneyUtils {
     /**
      * 将金额 乘以 1000返回BigDecimal
      * 用于计算
+     *
      * @param money
      * @return
      */
@@ -220,6 +224,7 @@ public class MoneyUtils {
     /**
      * 将金额 除以 1000返回BigDecimal
      * 用于计算
+     *
      * @param money
      * @return
      */
@@ -232,6 +237,7 @@ public class MoneyUtils {
     /**
      * 将元乘以1000返回String
      * 用于向服务器放金额时使用
+     *
      * @param money
      * @return
      */
@@ -241,5 +247,55 @@ public class MoneyUtils {
         return decimal.stripTrailingZeros().toPlainString();
     }
 
+    /**
+     * 将金额变成元  如果大于8000则变成万元
+     *
+     * @param money
+     * @return
+     */
+    public static String showMoneyFormt(String money) {
+        if (TextUtils.isEmpty(money)) {
+            return "0";
+        }
+        try {
+            BigDecimal big = new BigDecimal(money);
+            BigDecimal yuan = big.divide(new BigDecimal(1000));
+//            return doubleFormatMoney(yuan.doubleValue()) + "元";
+            int result1 = yuan.compareTo(new BigDecimal(8000));
+            if (result1 >= 0) {
+                BigDecimal wanYuan = yuan.divide(new BigDecimal(10000));
+                String s = doubleFormatMoney(wanYuan.doubleValue());
+                return s + "万元";
+            } else {
+                return doubleFormatMoney(yuan.doubleValue()) + "元";
+            }
+        } catch (Exception e) {
+            return "0";
+        }
+    }
+
+    /**
+     * 将金额变成元  如果大于8000则变成万元
+     *
+     * @param money
+     * @return
+     */
+    public static String showMoneyFormt(BigDecimal money) {
+
+        try {
+            BigDecimal yuan = money.divide(new BigDecimal(1000));
+//            return doubleFormatMoney(yuan.doubleValue()) + "元";
+            int result1 = yuan.compareTo(new BigDecimal(8000));
+            if (result1 >= 0) {
+                BigDecimal wanYuan = yuan.divide(new BigDecimal(10000));
+                String s = doubleFormatMoney(wanYuan.doubleValue());
+                return s + "万元";
+            } else {
+                return doubleFormatMoney(yuan.doubleValue()) + "元";
+            }
+        } catch (Exception e) {
+            return "0";
+        }
+    }
 
 }

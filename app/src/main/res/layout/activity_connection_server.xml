@@ -25,12 +25,13 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tv_telephone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:text="400-3888-666"
                 android:textColor="@color/blue"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                tools:text="0571-88888888" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,8 +52,8 @@
                     android:id="@+id/btn_cancel"
                     android:layout_width="110dp"
                     android:layout_height="45dp"
-                    android:background="@drawable/btn_cancel_bg"
                     android:layout_marginLeft="45dp"
+                    android:background="@drawable/btn_cancel_bg"
                     android:text="取消"
                     android:textColor="@color/blue" />
 

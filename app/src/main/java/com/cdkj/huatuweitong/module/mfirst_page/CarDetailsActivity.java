@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -15,6 +14,8 @@ import com.cdkj.baselibrary.base.AbsBaseLoadActivity;
 import com.cdkj.baselibrary.dialog.UITipDialog;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
+import com.cdkj.baselibrary.utils.DisplayHelper;
+import com.cdkj.baselibrary.utils.MoneyUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
 import com.cdkj.huatuweitong.R;
 import com.cdkj.huatuweitong.api.MyApiServer;
@@ -94,6 +95,8 @@ public class CarDetailsActivity extends AbsBaseLoadActivity {
             @Override
             protected void onSuccess(CarDetailsBean data, String SucMessage) {
                 currentData = data;
+                mBinding.web.getSettings().setDefaultFontSize(DisplayHelper.dpToPx(14));
+
                 mBinding.web.loadData("<style>\n" +           //设置图片自适应
                         "img{\n" +
                         " max-width:100%;\n" +
@@ -102,15 +105,15 @@ public class CarDetailsActivity extends AbsBaseLoadActivity {
                         "</style>" + data.getDescription(), "text/html; charset=UTF-8", "utf-8");
 
                 //这看效果图显示的好像是    品牌名字/名字/车系名字
-                mBinding.tvCarName.setText(data.getBrandName()+data.getName()+data.getSeriesName());
+                mBinding.tvCarName.setText(data.getBrandName() + data.getName() + data.getSeriesName());
 
-                String price = com.cdkj.baselibrary.utils.MoneyUtils.getShowPriceSign(data.getSfAmount());
-                String referencePrice = com.cdkj.baselibrary.utils.MoneyUtils.getShowPriceSign(data.getOriginalPrice());
-                String directionPrice = com.cdkj.baselibrary.utils.MoneyUtils.getShowPriceSign(data.getSalePrice());
+                String price = MoneyUtils.showMoneyFormt(data.getSfAmount());
+                String referencePrice = MoneyUtils.showMoneyFormt(data.getOriginalPrice());
+                String directionPrice = MoneyUtils.showMoneyFormt(data.getSalePrice());
 
                 mBinding.tvCarPrice.setText(price);
-                mBinding.tvReferencePrice.setText("经销商参考价" + referencePrice);
-                mBinding.tvDirectionPrice.setText("经厂商指导价" + directionPrice);
+                mBinding.tvReferencePrice.setText("经销商参考价¥" + directionPrice);
+                mBinding.tvDirectionPrice.setText("经厂商指导价¥" + referencePrice);
                 String advPic = data.getAdvPic();
 
                 String[] split = advPic.split("\\|\\|");
@@ -158,30 +161,13 @@ public class CarDetailsActivity extends AbsBaseLoadActivity {
 
     private void initBrean() {
 
-        mBinding.firstBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-        mBinding.firstBanner.setIndicatorGravity(BannerConfig.CENTER);
+        mBinding.firstBanner.setBannerStyle(BannerConfig.NUM_INDICATOR);
+        mBinding.firstBanner.setIndicatorGravity(BannerConfig.RIGHT);
         mBinding.firstBanner.setImageLoader(new GlideImageLoader());
 
         mBinding.firstBanner.setImages(mBanners);
         mBinding.firstBanner.start();
-        //初始化轮播图上面的页码
-        mBinding.tvIndicator.setText("1/" + mBanners.size());
-        mBinding.firstBanner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                mBinding.tvIndicator.setText((position + 1) + "/" + mBanners.size());
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
     private void initOnclick() {

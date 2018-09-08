@@ -92,7 +92,7 @@ public class FirstPageFragment extends BaseLazyFragment {
     }
 
     /**
-     *
+     *初始化下面Recycler的数据
      */
     private void initRefreshHelper() {
 
@@ -121,7 +121,7 @@ public class FirstPageFragment extends BaseLazyFragment {
 
             @Override
             public void getListDataRequest(int pageindex, int limit, boolean isShowDialog) {
-                getRecommentdProduct(pageindex, limit, isShowDialog);
+                getRecommentdProductData(pageindex, limit, isShowDialog);
             }
 
         });
@@ -133,7 +133,7 @@ public class FirstPageFragment extends BaseLazyFragment {
     /**
      * 获取分期产品
      */
-    private void getRecommentdProduct(int pageindex, int limit, boolean isShowDialog) {
+    private void getRecommentdProductData(int pageindex, int limit, boolean isShowDialog) {
 
         Map<String, String> map = new HashMap<>();
         map.put("brandCode", "");
@@ -152,7 +152,7 @@ public class FirstPageFragment extends BaseLazyFragment {
         call.enqueue(new BaseResponseModelCallBack<ResponseInListModel<ResponseInListModel<ExhibitionCenterBean>>>(mActivity) {
             @Override
             protected void onSuccess(ResponseInListModel<ResponseInListModel<ExhibitionCenterBean>> data, String SucMessage) {
-                mRefreshHelper.setData(data.getList(),"暂无更多数据",0);
+                mRefreshHelper.setData(data.getList(), "暂无更多数据", 0);
             }
 
             @Override
@@ -189,6 +189,7 @@ public class FirstPageFragment extends BaseLazyFragment {
 
             @Override
             protected void onSuccess(List<FirstPageBanner> data, String SucMessage) {
+                //暂未返回数据
                 mBanners.clear();
                 mBanners.addAll(data);
                 setBannerData();
@@ -210,7 +211,7 @@ public class FirstPageFragment extends BaseLazyFragment {
      */
     private void initCarRecommendBeanData() {
         Map<String, String> map = new HashMap<>();
-        map.put("location", "0");
+        map.put("location", "1");//1热门  0普通
         map.put("status", "1");
         Call call = RetrofitUtils.createApi(MyApiServer.class).getFirstPageCarRecommendCar("630416", StringUtils.getJsonToString(map));
 
@@ -292,14 +293,13 @@ public class FirstPageFragment extends BaseLazyFragment {
                 if (firstPageBanner == null || TextUtils.isEmpty(firstPageBanner.getUrl())) {
                     return;
                 }
-                if (firstPageBanner.getUrl()!=null){
-                    if (firstPageBanner.getUrl().indexOf("http") != -1){
+                if (firstPageBanner.getUrl() != null) {
+                    if (firstPageBanner.getUrl().indexOf("http") != -1) {
                         CdRouteHelper.openWebViewActivityForUrl(firstPageBanner.getName(), firstPageBanner.getUrl());
                     }
                 }
             }
         });
-
 
 
     }

@@ -56,7 +56,7 @@ public class RepaymentPlanActivity extends AbsBaseLoadActivity {
             currentData = (CarLoanDetailsActivityBean) getIntent().getSerializableExtra("data");
         }
 
-        mBinding.tvBeizhu.setText("(包含利息" + MoneyUtils.getShowPriceSign(currentData.getRestAmount()) + "元)");
+//        mBinding.tvBeizhu.setText("(包含利息" + MoneyUtils.getShowPriceSign(currentData.getRestAmount()) + "元)");
         mBinding.tvBeLeftOver.setText(MoneyUtils.getShowPriceSign(currentData.getRestAmount()));
 
         mBinding.recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -74,12 +74,8 @@ public class RepaymentPlanActivity extends AbsBaseLoadActivity {
 //                        CarLoanDetailsActivityBean.RepayPlanListBean item = adapter.getItem(position);
 //                        requestNet(item.getCode());
 //                    }
-//
-//
 //                });
             }
-
-
         });
     }
 

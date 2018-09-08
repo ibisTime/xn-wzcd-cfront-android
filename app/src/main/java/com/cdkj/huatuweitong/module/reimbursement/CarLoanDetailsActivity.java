@@ -13,12 +13,12 @@ import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.MoneyUtils;
 import com.cdkj.baselibrary.utils.StringUtils;
+import com.cdkj.huatuweitong.MainActivity;
 import com.cdkj.huatuweitong.R;
 import com.cdkj.huatuweitong.api.MyApiServer;
 import com.cdkj.huatuweitong.bean.CarLoanDetailsActivityBean;
 import com.cdkj.huatuweitong.bean.CarLoanDetailsActivityMonthBean;
 import com.cdkj.huatuweitong.databinding.ActivityCarLoanDetailsBinding;
-import com.cdkj.huatuweitong.utlis.MyTextUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,6 +68,7 @@ public class CarLoanDetailsActivity extends AbsBaseLoadActivity {
 
         }
         mBinding.llRepaymentPlan.setOnClickListener(v -> {
+            //还款计划
             if (mdata != null) RepaymentPlanActivity.open(CarLoanDetailsActivity.this, mdata);
         });
 
@@ -75,7 +76,7 @@ public class CarLoanDetailsActivity extends AbsBaseLoadActivity {
         mBinding.btnEarlyRepayment.setOnClickListener(v -> {
 
             String bankcardNumber;
-            bankcardNumber = mdata.getBudgetOrder().getRepayBankcardNumber();
+            bankcardNumber = mdata.getCode();
             AdvanceDetailsActivity.open(CarLoanDetailsActivity.this, mdata.getRestAmount() + "", bankcardNumber, mdata.getCode());
 
         });
@@ -92,13 +93,17 @@ public class CarLoanDetailsActivity extends AbsBaseLoadActivity {
             @Override
             protected void onSuccess(CarLoanDetailsActivityMonthBean data, String SucMessage) {
                 //这个不需要跳转  所以数据不用传递
-                mBinding.tvBeForOver.setText(MoneyUtils.showPriceDouble(data.getRepayCapital()));//这个先设置为本期本金
-                mBinding.tvLoanCar.setText(data.getRepayBiz().getBudgetOrder().getCarBrand());
-                mBinding.tvLoanTotal.setText(MoneyUtils.showPriceDouble(data.getPayedAmount() + data.getOverplusAmount()));//贷款总额
-                mBinding.tvLoanTerm.setText(data.getPeriods()+"");//贷款期限
-                mBinding.tvRepaymentPlan.setText(data.getBankcardNumber());//还款卡号
+                CarLoanDetailsActivityMonthBean.RepayBizBean repayBiz = data.getRepayBiz();
+                String beForOver = repayBiz == null ? "" : MoneyUtils.showPriceDouble(data.getRepayBiz().getRestAmount());
+                mBinding.tvBeForOver.setText(beForOver);//这个先设置为本期本金
 
-                MyTextUtils.setStatusType004(mBinding.tvLoanType, data.getCurNodeCode());
+                CarLoanDetailsActivityMonthBean.RepayBizBean.BudgetOrderBean budgetOrder = repayBiz.getBudgetOrder();
+                mBinding.tvLoanCar.setText(budgetOrder.getCarModel());
+                mBinding.tvLoanTotal.setText(repayBiz == null ? "" : MoneyUtils.showPrice(repayBiz.getLoanAmount()));//贷款总额
+                mBinding.tvLoanTerm.setText(data.getPeriods() + "");//贷款期sh
+                mBinding.tvRepaymentPlan.setText(data.getBankcardNumber());//还款卡号
+////                MyTextUtils.setStatusType004(mBinding.tvLoanType, data.getCurNodeCode());
+                mBinding.tvLoanType.setText(MainActivity.getNodeCode(data.getCurNodeCode()));
 
             }
 
@@ -130,40 +135,12 @@ public class CarLoanDetailsActivity extends AbsBaseLoadActivity {
                 mdata = data;
                 mBinding.tvBeForOver.setText(MoneyUtils.getShowPriceSign(data.getRestAmount()));
 
-                if (TextUtils.equals(data.getRefType(),"1")) {
-                    //商品贷
-                    mBinding.tvType.setText("贷款商品");
-                    mBinding.tvRepaymentPlan.setText(data.getBudgetOrder().getRepayBankcardNumber());//还款卡号
-
-                    if (data.getBudgetOrder().getProductOrderList() == null || data.getBudgetOrder().getProductOrderList().size() == 0)
-                        return;
-                    mBinding.tvLoanCar.setText(data.getBudgetOrder().getProductOrderList().get(0).getProductName());
-
-                }else if (TextUtils.equals(data.getRefType(),"0")){
-                    //车辆贷
-                    mBinding.tvLoanCar.setText(data.getBudgetOrder().getCarBrand());
-                    mBinding.tvType.setText("贷款车辆");
-                    mBinding.tvRepaymentPlan.setText(data.getBudgetOrder().getRepayBankcardNumber());//还款卡号
-                }
-
-
-                if (data.getBudgetOrder() != null) {
-                    mBinding.tvLoanCar.setText(data.getBudgetOrder().getCarBrand());
-                }
+                mBinding.tvBeForOver.setText(MoneyUtils.showPrice(data.getRestAmount()));//这个先设置为本期本金
+                mBinding.tvLoanCar.setText(data.getBudgetOrder().getCarModel());
                 mBinding.tvLoanTotal.setText(MoneyUtils.showPriceDouble(data.getLoanAmount()));//贷款总额
-                mBinding.tvLoanTerm.setText(data.getRepayPlanList().size()+"");//贷款期限
-//                if (data.getBudgetOrder() != null) {
-//                    mBinding.tvRepaymentPlan.setText(data.getBudgetOrder().getBankcardNumber());//还款卡号
-//                }
-
-                //0=还款中 1=正常已还款 2=正常结清 3=提前还款 4=确认提前结清 5=确认不还 6=确认处理结果
-                //还款状态
-                if (TextUtils.equals(data.getCurNodeCode(), "003_01")) {
-                    mBinding.tvLoanType.setText("还款中");
-                    mBinding.llButtom.setVisibility(View.VISIBLE);
-                } else {
-                    MyTextUtils.setStatusType003(mBinding.tvLoanType, data.getCurNodeCode());
-                }
+                mBinding.tvLoanTerm.setText(data.getPeriods() + "");//贷款期限
+                mBinding.tvRepaymentPlan.setText(data.getBankcardNumber());//还款卡号
+                mBinding.tvLoanType.setText(MainActivity.getNodeCode(data.getCurMonthRepayPlan() == null ? "" : data.getCurMonthRepayPlan().getCurNodeCode()));
             }
 
             @Override

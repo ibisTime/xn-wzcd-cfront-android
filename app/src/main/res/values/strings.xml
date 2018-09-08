@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">xn-wzcd-cfront-android</string>
+    <string name="app_name">温州会员端</string>
     <string name="mind">我的</string>
     <string name="firstpage">首页</string>
     <string name="recommend_car">推荐车系</string>
@@ -16,7 +16,7 @@
     <string name="car_calculator_model">型号</string>
     <string name="car_calculator_brand">品牌</string>
     <string name="car_calculator_one_pay">首付</string>
-    <string name="car_calculator_control_year">还款年限</string>
+    <string name="car_calculator_control_year">还款期数</string>
     <string name="nick_name">昵称</string>
     <string name="phone">修改手机号</string>
     <string name="psw">修改登录密码</string>
@@ -36,7 +36,7 @@
     <string name="UpDataPhoneActivityTitle">修改手机号</string>
     <string name="current_integral">当前积分</string>
     <string name="month_calculation">月供计算</string>
-    <string name="remain_loans">剩余贷款</string>
+    <string name="remain_loans">剩余本息</string>
     <string name="CarDetails">车辆详情</string>
     <string name="regist_pay">发起扣款</string>
     <string name="OrderSubmit">订单提交</string>

@@ -18,6 +18,7 @@ import com.cdkj.baselibrary.dialog.UITipDialog;
 import com.cdkj.baselibrary.interfaces.SendCodeInterface;
 import com.cdkj.baselibrary.interfaces.SendPhoneCoodePresenter;
 import com.cdkj.baselibrary.model.UserLoginModel;
+import com.cdkj.baselibrary.model.eventmodels.EventFinishAll;
 import com.cdkj.baselibrary.nets.BaseResponseModelCallBack;
 import com.cdkj.baselibrary.nets.RetrofitUtils;
 import com.cdkj.baselibrary.utils.AppUtils;
@@ -112,11 +113,11 @@ public class RegisterActivity extends AbsBaseLoadActivity implements SendCodeInt
             UITipDialog.showFall(RegisterActivity.this, getString(R.string.please_input_verification_code));
             return false;
         }
-        if (TextUtils.isEmpty(mBinding.edtRepassword.getText().toString())) {
+        if (TextUtils.isEmpty(mBinding.edtRepassword1.getText().toString())) {
             UITipDialog.showFall(RegisterActivity.this, getString(R.string.please_input_pwd));
             return false;
         }
-        if (mBinding.edtRepassword.getText().toString().length() < 6) {
+        if (mBinding.edtRepassword1.getText().toString().length() < 6) {
             UITipDialog.showFall(RegisterActivity.this, getString(R.string.check_pwd_info));
             return false;
         }
@@ -125,10 +126,11 @@ public class RegisterActivity extends AbsBaseLoadActivity implements SendCodeInt
             UITipDialog.showFall(RegisterActivity.this, getString(R.string.please_reinput_pwd));
             return false;
         }
-//                if (!TextUtils.equals(mBinding.edtRepassword.getText().toString(), mBinding.edtPassword.getText().toString())) {
-//                    UITipDialog.showFall(RegisterActivity.this, getString(R.string.check_pwd_info_2));
-//                    return;
-//                }
+
+        if (TextUtils.isEmpty(mBinding.edtNick.getText().toString())) {
+            UITipDialog.showFall(RegisterActivity.this, "请输入昵称");
+            return false;
+        }
         return true;
     }
 
@@ -172,7 +174,8 @@ public class RegisterActivity extends AbsBaseLoadActivity implements SendCodeInt
 
                 CdRouteHelper.openMain();
                 EventBus.getDefault().post("doCloseLogin");
-                finish();
+//                finish();
+                toLogin();
             }
 
             @Override
@@ -217,5 +220,59 @@ public class RegisterActivity extends AbsBaseLoadActivity implements SendCodeInt
             mSendCOdePresenter.clear();
             mSendCOdePresenter = null;
         }
+    }
+
+
+    //=================注册成功直接登录================
+
+    private void toLogin() {
+        HashMap<String, String> hashMap = new HashMap<>();
+
+        hashMap.put("loginName", mBinding.edtPhone.getText().toString());
+        hashMap.put("kind", MyCdConfig.USERTYPE);
+        hashMap.put("loginPwd", mBinding.edtRepassword.getText().toString());
+
+//        hashMap.put("systemCode", MyCdConfig.SYSTEMCODE);
+
+        Call call = RetrofitUtils.getBaseAPiService().userLogin("805050", StringUtils.getJsonToString(hashMap));
+
+        showLoadingDialog();
+        call.enqueue(new BaseResponseModelCallBack<UserLoginModel>(this) {
+            @Override
+            protected void onSuccess(UserLoginModel data, String SucMessage) {
+                if (!TextUtils.isEmpty(data.getUserId())) {
+                    LoginSuccess(data, "登录成功");
+                } else {
+                    UITipDialog.showInfo(RegisterActivity.this, "登录失败");
+                    CdRouteHelper.openLogin(true);
+                }
+            }
+
+            @Override
+            protected void onReqFailure(String errorCode, String errorMessage) {
+            }
+
+            @Override
+            protected void onNoNet(String msg) {
+                UITipDialog.showInfo(RegisterActivity.this, "暂无网络");
+            }
+
+            @Override
+            protected void onFinish() {
+                disMissLoading();
+            }
+        });
+
+    }
+
+
+    public void LoginSuccess(UserLoginModel user, String msg) {
+
+        SPUtilHelpr.saveUserId(user.getUserId());
+        SPUtilHelpr.saveUserToken(user.getToken());
+        SPUtilHelpr.saveUserPhoneNum(mBinding.edtPhone.getText().toString());
+        SPUtilHelpr.saveUserPsw(mBinding.edtRepassword.getText().toString());
+        EventBus.getDefault().post(new EventFinishAll());
+        CdRouteHelper.openMain();
     }
 }

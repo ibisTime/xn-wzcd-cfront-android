@@ -8,6 +8,7 @@ import com.cdkj.baselibrary.model.IntroductionInfoModel;
 import com.cdkj.baselibrary.model.IsSuccessModes;
 import com.cdkj.baselibrary.model.MyBankCardListMode;
 import com.cdkj.baselibrary.model.QiniuGetTokenModel;
+import com.cdkj.baselibrary.model.SystemKeyDataBean;
 import com.cdkj.baselibrary.model.TypeInfoModel;
 import com.cdkj.baselibrary.model.UserLoginModel;
 import com.cdkj.baselibrary.model.pay.AliPayRequestMode;
@@ -197,5 +198,15 @@ public interface BaseApiServer {
     @POST("api")
     Call<BaseResponseModel<Boolean>> setDefultAddress(@Field("code") String code, @Field("json") String json);
 
+    /**
+     * 获取系统参数
+     *
+     * @param code
+     * @param json
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("api")
+    Call<BaseResponseModel<SystemKeyDataBean>> getSystemKeyData(@Field("code") String code, @Field("json") String json);
 
 }
